@@ -2,7 +2,7 @@ import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
 import {
   calculateFinalBalance,
   InterestPaymentFrequency,
-} from "../utils/termDepositCalculator";
+} from "../src/utils/termDepositCalculator";
 
 // Fixed date for setting the system time
 const FIXED_DATE = "2023-05-01";
@@ -19,14 +19,14 @@ describe("Calculate final balance", () => {
   });
   it("calculates final balance with monthly interest payments", () => {
     const startDeposit = 10000;
-    const investmentTermInYears = 3;
+    const endMonth = "2026-05";
     const interestRate = 1.1;
     const interestPaymentFrequency = InterestPaymentFrequency.Monthly;
 
     expect(
       calculateFinalBalance(
         startDeposit,
-        investmentTermInYears,
+        endMonth,
         interestRate,
         interestPaymentFrequency
       )
@@ -35,14 +35,14 @@ describe("Calculate final balance", () => {
 
   it("calculates final balance with interest paid at maturity", () => {
     const startDeposit = 10000;
-    const investmentTermInYears = 3;
+    const endMonth = "2026-05";
     const interestRate = 1.1;
     const interestPaymentFrequency = InterestPaymentFrequency.AtMaturity;
 
     expect(
       calculateFinalBalance(
         startDeposit,
-        investmentTermInYears,
+        endMonth,
         interestRate,
         interestPaymentFrequency
       )
@@ -51,17 +51,12 @@ describe("Calculate final balance", () => {
 
   it("calculates final balance with zero interest rate", () => {
     const startDeposit = 20000;
-    const investmentTermInYears = 3;
+    const endMonth = "2026-05";
     const interestRate = 0;
     const interestPaid = InterestPaymentFrequency.Monthly;
 
     expect(
-      calculateFinalBalance(
-        startDeposit,
-        investmentTermInYears,
-        interestRate,
-        interestPaid
-      )
+      calculateFinalBalance(startDeposit, endMonth, interestRate, interestPaid)
     ).toBe("20000.00");
   });
 });

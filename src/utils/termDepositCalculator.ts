@@ -48,12 +48,23 @@ const calculateCompoundInterest = (
   );
 };
 
+const calculateInvestmentTermInYears = (endDateInput: MonthInput): number => {
+  const startDate = new Date();
+  const endDate = new Date(endDateInput);
+  const investmentTermInMonths =
+    (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+    (endDate.getMonth() - startDate.getMonth());
+
+  return investmentTermInMonths / 12;
+};
+
 const calculateFinalBalance = (
   initialDeposit: number,
-  investmentTermInYears: number,
+  endDateInput: MonthInput,
   annualInterestRate: number,
   interestPaymentFrequency: InterestPaymentFrequency
 ): string => {
+  const investmentTermInYears = calculateInvestmentTermInYears(endDateInput);
   const interestCompoundingFrequency = getInterestCompoundingFrequency(
     interestPaymentFrequency,
     investmentTermInYears
@@ -71,4 +82,5 @@ const calculateFinalBalance = (
   return finalBalance.toFixed(2);
 };
 
+export type MonthInput = string;
 export { calculateFinalBalance, InterestPaymentFrequency };
