@@ -51,7 +51,7 @@ const App: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="interestRate">Interest Rate (%):</label>
+          <label htmlFor="interestRate">Annual Interest Rate (%):</label>
           <input
             id="interestRate"
             type="number"
@@ -61,7 +61,7 @@ const App: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="endMonth">End Month:</label>
+          <label htmlFor="endMonth">Investment Term End Month:</label>
           <input
             id="endMonth"
             type="month"
@@ -70,7 +70,7 @@ const App: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="interestPaid">Interest Paid:</label>
+          <label htmlFor="interestPaid">Interest Payment Frequency:</label>
           <select
             id="interestPaid"
             value={interestPaid}
