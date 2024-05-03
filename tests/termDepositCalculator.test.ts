@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
+import { describe, expect, it, beforeEach, afterEach, vi, test } from "vitest";
 import {
   calculateFinalBalance,
   InterestPaymentFrequency,
@@ -58,5 +58,18 @@ describe("Calculate final balance", () => {
     expect(
       calculateFinalBalance(startDeposit, endMonth, interestRate, interestPaid)
     ).toBe("20000.00");
+  });
+
+  test.each([
+    { endMonth: "2022-01", description: "end date is before the current date" },
+    { endMonth: FIXED_DATE, description: "end date is less than one month" },
+  ])("throws an error when $description", ({ endMonth }) => {
+    const startDeposit = 10000;
+    const interestRate = 1.1;
+    const interestPaid = InterestPaymentFrequency.Monthly;
+
+    expect(() =>
+      calculateFinalBalance(startDeposit, endMonth, interestRate, interestPaid)
+    ).toThrowError("End date cannot be before or the same as the current date");
   });
 });

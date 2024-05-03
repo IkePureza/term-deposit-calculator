@@ -55,7 +55,31 @@ const calculateInvestmentTermInYears = (endDateInput: MonthInput): number => {
     (endDate.getFullYear() - startDate.getFullYear()) * 12 +
     (endDate.getMonth() - startDate.getMonth());
 
+  if (investmentTermInMonths <= 0) {
+    throw new Error(
+      "End date cannot be before or the same as the current date"
+    );
+  }
+
   return investmentTermInMonths / 12;
+};
+
+const validateInputs = (
+  initialDeposit: number,
+  endDateInput: MonthInput,
+  annualInterestRate: number
+): void => {
+  if (initialDeposit <= 0 || isNaN(initialDeposit)) {
+    throw new Error("Initial deposit must be a positive number");
+  }
+
+  if (!endDateInput) {
+    throw new Error("End date is required");
+  }
+
+  if (isNaN(annualInterestRate)) {
+    throw new Error("Annual interest rate must be a valid number");
+  }
 };
 
 const calculateFinalBalance = (
@@ -64,6 +88,7 @@ const calculateFinalBalance = (
   annualInterestRate: number,
   interestPaymentFrequency: InterestPaymentFrequency
 ): string => {
+  validateInputs(initialDeposit, endDateInput, annualInterestRate);
   const investmentTermInYears = calculateInvestmentTermInYears(endDateInput);
   const interestCompoundingFrequency = getInterestCompoundingFrequency(
     interestPaymentFrequency,
