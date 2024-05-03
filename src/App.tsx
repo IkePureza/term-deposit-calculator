@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import "./App.css";
 import {
   calculateFinalBalance,
@@ -16,9 +16,8 @@ const App: React.FC = () => {
     InterestPaymentFrequency.AtMaturity
   );
   const [error, setError] = useState<string>("");
-  const [finalBalance, setFinalBalance] = useState<string>("");
 
-  useEffect(() => {
+  const finalBalance = useMemo(() => {
     try {
       const calculatedBalance = calculateFinalBalance(
         startDeposit,
@@ -27,15 +26,14 @@ const App: React.FC = () => {
         interestPaid
       );
       setError("");
-      setFinalBalance(calculatedBalance);
+      return calculatedBalance;
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
-        setFinalBalance("");
       } else {
         setError("An unknown error occurred.");
-        setFinalBalance("");
       }
+      return "";
     }
   }, [startDeposit, endMonth, interestRate, interestPaid]);
 
@@ -48,6 +46,7 @@ const App: React.FC = () => {
           <input
             id="startDeposit"
             type="number"
+            step="500"
             value={startDeposit}
             onChange={(e) => setStartDeposit(parseFloat(e.target.value))}
           />
@@ -57,7 +56,7 @@ const App: React.FC = () => {
           <input
             id="interestRate"
             type="number"
-            step="0.01"
+            step="1"
             value={interestRate}
             onChange={(e) => setInterestRate(parseFloat(e.target.value))}
           />
