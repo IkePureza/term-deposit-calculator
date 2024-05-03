@@ -123,12 +123,12 @@ Accessibility has been taken into consideration throughout the development proce
 
 Some things I would do given more time:
 
--Improve error handling testing
--Use client-side input validation with formkit
--Split the app into individual components for better readability and modularization
--Split utils code into separate files for better separation of concerns (e.g., enum to its own separate file)
--Move all of the term deposit logic to a backend
--Add integration tests with React Testing Library
--Form accessibility and tooltips
--Add a continuous deployment GitHub action
--Add a utility function to format the final balance to "$xxx,xxx,xxx"
+- Improve error handling testing
+- Use client-side input validation with formkit
+- Split the app into individual components for better readability and modularization
+- Split utils code into separate files for better separation of concerns (e.g., enum to its own separate file)
+- Move all of the term deposit logic to a backend
+- Add integration tests with React Testing Library
+- Form accessibility and tooltips
+- Add a continuous deployment GitHub action
+- Add a utility function to format the final balance to "$xxx,xxx,xxx"
