@@ -5,10 +5,9 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'airbnb', 
     'airbnb-typescript',
     'airbnb/hooks',
-    'plugin:prettier/recommended' // To integrate with Prettier, if you use it
+    'plugin:prettier/recommended'
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
